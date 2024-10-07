@@ -1,0 +1,6 @@
+config:
+  gcp:project: pathquest
+  pathquest:db-root-password:
+    secure: AAABAB2df1omPkQzXbJ4ebvKN4W8WKyQ2a7dACiix07fulGA9rFEoTBMHt4JCQ==
+  pathquest:mysql-password:
+    secure: AAABACY2Le2NS7RJY7hcqGnEvjyd+ZhIGSzxbZzQSwq6YD7mAgr9oweOceY=
