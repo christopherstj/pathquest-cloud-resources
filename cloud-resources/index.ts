@@ -44,7 +44,7 @@ const mysqlDbInstance = new gcp.sql.DatabaseInstance("mysql-db-instance", {
 const mysqlDb = new gcp.sql.Database(`${envType}-db`, {
     instance: mysqlDbInstance.name,
     project: PROJECT_ID,
-    collation: "utf8_general_ci",
+    collation: "utf8mb3_general_ci",
     name: `${envType}-db`,
 });
 
@@ -54,4 +54,23 @@ const localUser = new gcp.sql.User("web-app-bi", {
     type: "BUILT_IN",
     name: "local-user",
     password: cfg.requireSecret("mysql-password"),
+});
+
+const dockerRegistry = new gcp.artifactregistry.Repository("pathquest", {
+    description: "Image repo for PathQuest",
+    format: "DOCKER",
+    location: location,
+    repositoryId: "pathquest",
+});
+
+const apiCloudService = new gcp.cloudrunv2.Service("pathquest-api", {
+    name: "pathquest-api",
+    location: location,
+    template: {
+        containers: [
+            {
+                image: `${location}-docker.pkg.dev/${PROJECT_ID}/pathquest/pathquest-api:latest`,
+            },
+        ],
+    },
 });
