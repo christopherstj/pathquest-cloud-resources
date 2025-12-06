@@ -31,7 +31,7 @@ const mysqlDbInstance = new gcp.sql.DatabaseInstance("mysql-db-instance", {
     project: PROJECT_ID,
     rootPassword: cfg.requireSecret("db-root-password"),
     settings: {
-        tier: "db-f1-micro",
+        tier: "db-custom-1-3840",
         databaseFlags: [
             {
                 name: "cloudsql_iam_authentication",
